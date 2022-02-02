@@ -1,5 +1,404 @@
 
 
-<h1 style="color:Tomato;">Hello World</h1>
-<p style="color:DodgerBlue;">Lorem ipsum...</p>
-<p style="color:MediumSeaGreen;">Ut wisi enim...</p> 
+--------------change git prompt status-----------
+
+on terminal
+
+>>> echo $PS1
+
+copy the text and added into script 
+
+
+$PS1 is the enviroment variable that store the default prompt setting 
+we see every time when we log in the console.
+
+
+
+open file .bashrc and edit with ( gedit ~/.bashrc)
+Add this script in bottom of the .bashrc
+-------------------------------
+git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$(git_branch)\$ "
+
+------------------
+
+Add this on the bottom of your ~/.bashrc file. Add the git_branch function on the shell prompt, 
+by adding it on PS1 variable. Sample like below (that based on my $PS1 output above).
+
+Save the file .bashrc
+
+run this command on terminal to reflect the changes.
+>>>> source ~/.bashrc
+
+
+close all terminal and reopen move to git directory 
+
+-------------------------------------
+
+
+
+--------------------------------------
+ssh-keygen -t rsa -b 4096 -C "email same as git account"  
+
+default ssh key located in user directory (/user/gwen/.ssh/id-rsa): Enter can change key name if needed
+
+No password   Enter
+
+serach for key  by  
+
+ls | grep  " key name" 
+
+pub key and private key 
+
+open pub key and copy into git SSH and GPG (add new key)
+
+
+
+-----------------Start git----------
+
+Add user in github
+--
+git config --global user.name " user name"
+
+git config --user.email " user email"
+
+git config --global color.ui auto  ( colore editor)
+
+----------------------------------------------------------
+------git working directory for new projekt-----
+
+create directory and init the directory by:
+
+git init ( directory name path)
+
+---------Remove init directory-----------------------------
+
+git-directory = ls -a  / rm -rf (remove git file )
+
+out of git directory =  git rmdir (git directory) 
+
+
+---------add new file in Staging area --------------------------------
+
+git directory >> git add "file name"
+
+or have all file i directory :
+
+git directory >> git add .
+
+
+git directory check status >>>   git status 
+
+  
+-------------return or out of staging area--------------
+
+git diretory >>>>>>> git rm --cached "file name"
+
+or take all file used
+
+git directory >>> git rm -r --cached .
+
+git directory check status >>>   git status 
+
+-------------------move to commit after staging area---------------------------
+
+git directory >> git commit -m "add comment"    (m = command about the file)
+git directory >> git status
+
+
+if file modified used command >> -am instead of -m  meaning Add and Commit at the same time.
+
+
+in case want change comment try :
+
+git directory >> git commit --amend -m  <write new commnet> in "git file"
+
+------------------check the log of commited file-----------
+
+git directory >> git log
+
+detajl info copy commit id from comit log ;
+
+git directory >> git show "past commit id"
+
+----------modification and view diff in main------------- 
+
+git directory main >> git diff " git file name"
+
+
+--------------change on branches use diff to compare---------
+
+git directory main >>> git diff "branches name" enter
+
+----------- Push branches file changes between branches and main localy -----------
+
+git main >>> git merge "branches name"  enter
+
+ error git branch not exits ,  copy the command push and create the branch i git hub repository 
+ 
+git push --set-upstream origin first-branch    (--set-upstream create first-branch in git hub )
+ 
+ --------------------------
+ ((( remote: 
+remote: Create a pull request for 'first-branch' on GitHub by visiting:
+remote:      https://github.com/mazlaghn/first-git/pull/new/first-branch  )))
+
+
+Git hub interface views the new branches click check and after confirm the merge.
+
+when merge complete branches can be delete from git hub and local.
+ 
+ 
+
+-----------merge file changes between branches and main localy -----------
+
+
+git main >>> git merge "branches name"  Enter
+
+after complete merge delete the branch by command:
+
+git main >> git branch -d "branches name"
+
+
+
+-------------git log git id to get more detail of changes---------------
+
+git log >> command to view all commit 
+
+
+copy HASH text and pass into terminal with command >>>>>>>>>   git reset "add hash text"   Enter / remove lasted changes 
+
+copy HASH text and pass into terminal with command >>>>>>>>>  git reset --hard  "add hash text" Enter  // remove all changes back to first stage
+
+
+
+-------------------restore changes after add or  commit ----------
+
+git directory after add in staging >> git reset "file name"   ( unstaging file)
+
+git directory after commit the file > git reset HEAD~1      ( head~1 = reset latest commit file back to staging)
+
+
+
+
+-------------------main push commit file into GitHub-----------------------------
+
+
+git directory >> git remote add origin https://github.com/mazlaghn/repository-git.git
+
+git directory >> git branch -M main
+
+git directory >> sudo git push -u origin main
+
+-------------------------------------------
+
+add new fiel into same repositoryu noi need to use  " -u orgin main command"
+
+need only use " git push " 
+
+--------------pull file from repository to local directory-------------------------
+
+git directory >> git pull 
+
+in sam cse need to write rmote repository path :
+
+git pull git@github.com:mazlaghn/repository-git.git         (( git pull git@github.com:"git user"/"repositort name".git ))
+
+
+
+
+---------------------Git branch---------------------------------------
+ create branch 
+ 
+ git directory main git >>>> git checkout -b "branch name"  enter  ( creat branches )
+ 
+ git directory main git branch directory >>>>>> git branch   (view the branches )
+ 
+ git directory main git branch directory >>>>>> git checkout main      (switch to main)
+ 
+git directory main git >>>>>> git checkout "branch name"     (switch to branch)
+
+
+--------------------------Merage branch to main------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+linux command 
+
+read the file command:
+ cat "file name"
+--------------
+open and modify file
+ vi " file name"
+ 
+ write text start with :
+ 
+  i = insert
+  
+----------------
+ close and save file 
+ 
+ <scape> + < : > + <wq>
+ 
+-------------------
+close the vi:
+ Crtl+Z
+ ----------------------
+
+*create the file:
+touch "fileName"
+
+** Edit or Modify teh file:
+vi "fileName"
+**After close and save the file used command:
+Esc + : + wq
+-----------------
+
+
+
+create directory
+mkdir "directory name"
+git init ( on the directory)
+
+create file in init directory
+touch #file name"
+git status
+
+Add file to directory (staging)
+git add "file name"
+git status
+
+
+not expected redo the added file bck to directory or unstage use :
+git rm --cached <file>..." to unstage)
+	
+
+All file from directory use command, staging all the files:
+git add .
+
+unstaging added file back to normal use command :
+git rm -r --cached.
+
+
+move from staging  area to safe poiny readuy to put i git server.
+git commit -m "add comment"
+git status
+
+
+confirm commit is completet use command:
+git log
+
+commit file use command.
+git show "git commit key value"
+
+
+restore changes after commit;
+git restore "commited file name"
+
+
+check update file and compare:
+git diff "file name1" "file name2"
+
+
+change only added comment in commited file use:
+git commit --amend -m "new comment"
+
+
+
+
+
+git remote add origin https://github.com/"user name"/"git hub repository"
+git branch -M main
+git push -u origion main
+
+
+
+
+
+
+
+------------------
+
+create file command
+
+touch <file name and extension>
+
+Dave@Dave MINGW64 /c/test (master)
+$ touch test1.txt
+
+Dave@Dave MINGW64 /c/test (master)
+$ cat > test2.txt
+
+
+--------------
+Dave@Dave MINGW64 ~
+$ git help config  (shows all command)
+
+Dave@Dave MINGW64 ~
+$ git config --help
+
+--------------------
+
+--
+Change default text editor:
+git config --global core.editor "'C:\Windows\gvim.bat' -f -i NONE"
+
+Change SSL/TLS ("HTTPS Transport") library:
+git config --global http.sslBackend schannel
+git config --global http.sslBackend openssl
+
+Change line ending conventions:
+git config --global core.autocrlf true
+git config --global core.autocrlf input
+git config --global core.autocrlf false
+
+Enable / Disable file system caching:
+git config core.fscache true
+git config core.fscache false
+
+Disable Git Crendential Mapper:
+git config --system --unset credential.helper
+git config --global credential.helper ''
+git config --global core.askpass ''
+
+
+-------------
+
+create a new repository on the command line
+
+echo "# python1" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/mazlaghn/python1.git
+git push -u origin main
+
+
+
+----------
+
+ push an existing repository from the command line
+git remote add origin https://github.com/mazlaghn/python1.git
+git branch -M main
+git push -u origin main
+
+
+
